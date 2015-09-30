@@ -21,12 +21,19 @@ public class PathFinder {
         int currentRow = startRow;
         int currentColumn = startColumn;
         
+        // BUT HOW DO I DO DIRECTION?!
+        
+        // Base case:
         if (maze.isExit(currentRow,currentColumn)){
             // add block to linked list
             myPath.add(new Coordinate(currentRow, currentColumn));
             // #treasureFound
             // return true? Or return the linked list, not sure yet
         }
+        // Recursive case:
+        else{
+        }
+        
         
 
         // bogus code. REPLACE THIS ---------------------------
