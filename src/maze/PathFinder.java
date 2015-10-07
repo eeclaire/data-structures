@@ -10,51 +10,106 @@ public class PathFinder {
 
     Maze maze;
 
+    boolean dirNorth;
+    boolean dirSouth;
+    boolean dirWest;
+    boolean dirEast;
+
+    //boolean found;
+    //boolean treasure = false;
     public PathFinder(Maze iMaze) {
         maze = iMaze;
+
+        dirNorth = false;
+        dirSouth = false;
+        dirWest = false;
+        dirEast = false;
+        //this.dirNorth = 0;
+        //found = false;
     }
 
     public LinkedList<Coordinate> findPath(int startRow, int startColumn) {
         LinkedList<Coordinate> myPath = new LinkedList<Coordinate>();
 
-        //* INSERT YOUR CODE HERE *//
-        int currentRow = startRow;
-        int currentColumn = startColumn;
-        
-        // BUT HOW DO I DO DIRECTION?!
-        
-        // Base case:
-        if (maze.isExit(currentRow,currentColumn)){
-            // add block to linked list
-            myPath.add(new Coordinate(currentRow, currentColumn));
-            // #treasureFound
-            // return true? Or return the linked list, not sure yet
-        }
-        // Recursive case:
-        else{
-        }
-        
-        
+        //boolean end = false;
+        // Enter into the recursive method
+        traversePath(startRow, startColumn, false, false, false, false, myPath);
 
-        // bogus code. REPLACE THIS ---------------------------
-        myPath.add(new Coordinate(startRow, startColumn));
-        System.out.print("This cell has the following walls: ");
-        if (maze.hasNorthWall(startRow, startColumn)) {
-            System.out.print("North ");
-        }
-        if (maze.hasSouthWall(startRow, startColumn)) {
-            System.out.print("South ");
-        }
-        if (maze.hasEastWall(startRow, startColumn)) {
-            System.out.print("East ");
-        }
-        if (maze.hasWestWall(startRow, startColumn)) {
-            System.out.print("West ");
-        }
-        System.out.println("");
-        // end bogus code -----------------------
-                
-
+        // return whatever path linked list you have
         return (myPath);
     }
+
+    public boolean traversePath(int r, int c, boolean dirNorth, boolean dirSouth, boolean dirWest, boolean dirEast, LinkedList<Coordinate> myPath) {
+
+        //LinkedList<Coordinate> myPath = new LinkedList<Coordinate>();
+        boolean treasure = false;
+
+        int row = r;
+        int col = c;
+
+        // Base case:
+        if (maze.isExit(row, col)) {
+            // set the listener boolean to true
+            treasure = true;
+            //found = true;
+            myPath.add(new Coordinate(row, col));
+            return true;
+        } // Recursive case:
+        else {
+            // Check the north side if no wall and not coming from the north
+            if (dirNorth == false && maze.hasNorthWall(row, col) == false) {
+
+                // Go north from south
+                treasure = traversePath(row - 1, col, false, true, false, false, myPath);
+                if (treasure == true) {
+                    // if the treasure has been found, add this to the linked list path
+                    myPath.add(new Coordinate(row, col));
+                    return true;
+                }
+            }
+            // Check the south side if no wall and not coming from the south
+            if (dirSouth == false && maze.hasSouthWall(row, col) == false) {
+
+                // Go south from north
+                treasure = traversePath(row + 1, col, true, false, false, false, myPath);
+                if (treasure == true) {
+                    // if the treasure has been found, add this to the linked list path
+                    myPath.add(new Coordinate(row, col));
+                    return true;
+                }
+            }
+            // Check the west side if no wall and not coming from the west
+            if (dirWest == false && maze.hasWestWall(row, col) == false) {
+
+                // Go west from east
+                treasure = traversePath(row, col - 1, false, false, false, true, myPath);
+                if (treasure == true) {
+                    // if the treasure has been found, add this to the linked list path
+                    myPath.add(new Coordinate(row, col));
+                    return true;
+                }
+            }
+            // Check the east side if no wall and not coming from the east
+            if (dirEast == false && maze.hasEastWall(row, col) == false) {
+
+                // Go east from west
+                treasure = traversePath(row, col + 1, false, false, true, false, myPath);
+                if (treasure == true) {
+                    // if the treasure has been found, add this to the linked list path
+                    myPath.add(new Coordinate(row, col));
+                    return true;
+                }
+            }
+/*
+            if (treasure == true) {
+                // if the treasure has been found, add this to the linked list path
+                myPath.add(new Coordinate(row, col));
+                return true;
+            }
+*/
+            return treasure;
+        } // end of recursive case
+
+    }
+
 }
