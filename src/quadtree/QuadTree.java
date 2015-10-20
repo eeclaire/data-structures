@@ -22,13 +22,16 @@ public class QuadTree {
         // Create the new node to be placed
         QNode newNode = new QNode(v);
         
+        // Create new randomizer object
         Random rand = new Random();
         
+        // If there is no root node yet, place the new node there
         if (root == null){
             root = newNode;
             return;
         }
         
+        // Make a current node to keep track of position without losing root
         QNode current = root;
         
         while (true){
@@ -45,5 +48,27 @@ public class QuadTree {
         }
     }
 
+    // Method to traverse the tree and sum up the nodes
+    public double sum(QNode root){
+        // Create the variable to hold the sum
+        double sum = 0;
+        
+        // Do recursive stuff here
+       
+        
+        return sum;      
+    }
     
+    public double sumRecursive(QNode node){
+        
+        // Base case
+        if((node.children[0] ==  null)
+                && (node.children[1] == null)
+                && (node.children[2] == null)
+                && (node.children[3] == null)){
+            return node.value;
+        }
+        
+        
+    }
 }
