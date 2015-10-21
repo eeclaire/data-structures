@@ -5,6 +5,7 @@
  */
 package quadtree;
 
+import qtvisualizer.*;
 /**
  *
  * @author Claire
@@ -23,6 +24,8 @@ public class Main {
         
         // Do the sum thing
         qt.sum(qt.root);
+        
+        QuadTreeViz qtvis = new QuadTreeViz(qt.root);
     }
     
 }

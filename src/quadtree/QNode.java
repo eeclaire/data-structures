@@ -5,11 +5,13 @@
  */
 package quadtree;
 
+import qtvisualizer.QuadTreeNode;
+
 /**
  *
  * @author Claire
  */
-public class QNode {
+public class QNode implements QuadTreeNode{
     
     // Fields ------------------------------------------------------------------
     double value; 
@@ -18,6 +20,13 @@ public class QNode {
     // Constructor -------------------------------------------------------------
     public QNode(double value){
         this.value = value; 
+    }
+    
+    public QuadTreeNode[] getChildren(){
+        // I guess I have to do something here?
+        
+        // I guess I return a QNode array?
+        return children;
     }
     
     
