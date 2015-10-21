@@ -1,34 +1,37 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Claire Durand
+ * CIS 2168 - Random Quadtree Lab
+ * 10/21/2015
+ * 
+ * QNode Class
+ * Implements the QuadTreeNode interface. 
+ * Class to describe the nodes of the quad tree. Each node has one value (set 
+ * 0-100 in main) and 4 possible node children. The class defines the interface
+ * getChildren method by returning the children of each node to be displayed.
+ * 
  */
 package quadtree;
 
 import qtvisualizer.QuadTreeNode;
 
-/**
- *
- * @author Claire
- */
 public class QNode implements QuadTreeNode{
     
-    // Fields ------------------------------------------------------------------
+    // Fields -----------------------------------------------------------------
     double value; 
     QNode[] children = new QNode[4]; 
     
-    // Constructor -------------------------------------------------------------
-    public QNode(double value){
-        this.value = value; 
+    // Constructor ------------------------------------------------------------
+    public QNode(double value){     
+        this.value = value;     // set node value to input value
     }
     
+    
+    // Methods ----------------------------------------------------------------
+    @Override
     public QuadTreeNode[] getChildren(){
-        // I guess I have to do something here?
-        
-        // I guess I return a QNode array?
+        // Return the children of the node in order to visualize them
         return children;
-    }
-    
-    
+    }   
 }
-    
+
+// End of QNode.java -----------------------------------------------------------

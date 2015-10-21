@@ -1,7 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Claire Durand
+ * CIS 2168 - Random Quadtree Lab
+ * 10/21/2015
+ * 
+ * QuadTree Class
+ * Implements the QuadTreeNode interface. 
+ * Class to describe the nodes of the quad tree. Each node has one value (set 
+ * 0-100 in main) and 4 possible node children. The class defines the interface
+ * getChildren method by returning the children of each node to be displayed.
+ * 
  */
 package quadtree;
 
@@ -12,7 +19,6 @@ public class QuadTree {
     
     // Fields -----------------------------------------------------------------
     QNode root;
-    //QNode[] children = new QNode[4];
     
     // Methods ----------------------------------------------------------------
     
@@ -38,7 +44,8 @@ public class QuadTree {
             // generate a random number between 0 (inclusive) and 4 (exclusive)
             int r = rand.nextInt(4);
             
-            // If the random child of this node is free, give it the new node. 
+            // If the random child of this node is free, give it the new node
+            // and break out of the loop.
             // Otherwise, check a random child of this child.
             if (current.children[r] == null){
                 current.children[r] = newNode;
@@ -51,22 +58,24 @@ public class QuadTree {
 
     // Method to traverse the tree and sum up the nodes
     public double sum(QNode root){
+        
         // Create the variable to hold the sum
         double sum;
         
-        // Do recursive stuff here
+        // Call recursive sum function for sum of the node values under root
        sum = sumRecursive(root);
        
        // Print out the result, for verification purposes
        System.out.println("Sum = " + sum);
-        
-        return sum;      
+       
+       // Return the sum of the 
+       return sum;      
     }
     
-    // Method to sum up all of the values in the tree
+    // Method to sum up all of the values under and including a node
     public double sumRecursive(QNode node){
         
-        // Base case
+        // Base case - if you've reached a leaf
         if((node.children[0] ==  null)
                 && (node.children[1] == null)
                 && (node.children[2] == null)
@@ -74,7 +83,8 @@ public class QuadTree {
             return node.value;
         }
         
-        // Recursive case
+        // Recursive case - if any of the children are not null,
+        // go into them and retrieve their children's values
         else{
             double midSum = 0;
             
@@ -87,15 +97,10 @@ public class QuadTree {
             if((node.children[3]) != null)
                     midSum = midSum + sumRecursive(node.children[3]);
             
+            // Return both the current value and the value recursed up
             return midSum + node.value;
-            
-            /*
-            return (sumRecursive(node.children[0]) 
-                    + sumRecursive(node.children[1])
-                    + sumRecursive(node.children[2])
-                    + sumRecursive(node.children[3])); */
-        }
-        
-        
+        }    
     }
 }
+
+// End of QuadTree.java --------------------------------------------------------
