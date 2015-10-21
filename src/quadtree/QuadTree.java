@@ -12,7 +12,7 @@ public class QuadTree {
     
     // Fields -----------------------------------------------------------------
     QNode root;
-    QNode[] children = new QNode[4];
+    //QNode[] children = new QNode[4];
     
     // Methods ----------------------------------------------------------------
     
@@ -42,8 +42,9 @@ public class QuadTree {
             // Otherwise, check a random child of this child.
             if (current.children[r] == null){
                 current.children[r] = newNode;
+                break;
             } else {
-                current = current.children[r];
+                current = current.children[r];    
             }
         }
     }
@@ -51,14 +52,18 @@ public class QuadTree {
     // Method to traverse the tree and sum up the nodes
     public double sum(QNode root){
         // Create the variable to hold the sum
-        double sum = 0;
+        double sum;
         
         // Do recursive stuff here
+       sum = sumRecursive(root);
        
+       // Print out the result, for verification purposes
+       System.out.println("Sum = " + sum);
         
         return sum;      
     }
     
+    // Method to sum up all of the values in the tree
     public double sumRecursive(QNode node){
         
         // Base case
@@ -67,6 +72,28 @@ public class QuadTree {
                 && (node.children[2] == null)
                 && (node.children[3] == null)){
             return node.value;
+        }
+        
+        // Recursive case
+        else{
+            double midSum = 0;
+            
+            if((node.children[0]) != null)
+                    midSum = midSum + sumRecursive(node.children[0]);
+            if((node.children[1]) != null)
+                    midSum = midSum + sumRecursive(node.children[1]);
+            if((node.children[2]) != null)
+                    midSum = midSum + sumRecursive(node.children[2]);
+            if((node.children[3]) != null)
+                    midSum = midSum + sumRecursive(node.children[3]);
+            
+            return midSum + node.value;
+            
+            /*
+            return (sumRecursive(node.children[0]) 
+                    + sumRecursive(node.children[1])
+                    + sumRecursive(node.children[2])
+                    + sumRecursive(node.children[3])); */
         }
         
         
