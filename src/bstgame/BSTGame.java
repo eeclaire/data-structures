@@ -15,10 +15,10 @@ public class BSTGame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         // TODO code application logic here
-        BST bst = new BST(9);
-        bst.createFromNumberSequence(bst.seq);
-    }
+        //BST bst = new BST(9);
+        //bst.createFromNumberSequence(bst.seq);
+    //}
     
 }

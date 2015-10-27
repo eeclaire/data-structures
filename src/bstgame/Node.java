@@ -1,5 +1,7 @@
 package bstgame;
 
+import java.awt.Color;
+
 
 
 
@@ -9,9 +11,12 @@ public class Node {
     int value;
     boolean status; // 0 is filled, 1 if empty (can still be clicked)
     
-    // SimpleGUI coordinates
+    // Parameters for SimpleGUI (coordinates and size)
     int px;     
-    int py;     
+    int py; 
+    int sizeX;
+    int sizeY;
+    
     
     // Child nodes
     Node LChild;
@@ -20,6 +25,9 @@ public class Node {
     // Constructors -----------------------------------------------------------
     public Node(int value){
         this.value = value;
+        
+        this.sizeX = 40;
+        this.sizeY = 40;
     }
     
     // Methods ----------------------------------------------------------------
@@ -28,6 +36,9 @@ public class Node {
     public void visualize(){
         // Needs to check if node is empty (can still be clicked) or if it is 
         // filled (shows the correctly guessed value)
+        
+        // Draw the ellipse
+        Main.sg.drawFilledEllipse(this.px, this.py, this.sizeX, this.sizeY, Color.RED, 1,"");
     }
     
     // I think should return whether click was inside 
