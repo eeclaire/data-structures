@@ -9,6 +9,11 @@ public class Node {
     int value;
     boolean status; // 0 is filled, 1 if empty (can still be clicked)
     
+    // SimpleGUI coordinates
+    int px;     
+    int py;     
+    
+    // Child nodes
     Node LChild;
     Node RChild;
     

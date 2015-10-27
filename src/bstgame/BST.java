@@ -7,6 +7,7 @@ import java.util.Random;
 public class BST {
     // Fields -----------------------------------------------------------------
     // Probably a root somewhere hurrr
+    Node root;
     int [] seq;
     
     
@@ -19,7 +20,6 @@ public class BST {
     // Methods ----------------------------------------------------------------
     
     // Creates the binary tree data structure from the permuted array
-    // Don't forget that in BST left < root < right!
     public void createFromNumberSequence(int[]A){
         int i;
         for (i=0; i<=A.length-1; i++){
@@ -30,6 +30,52 @@ public class BST {
     // Adds each node to the tree (remember: in BST left < root < right)
     public void add (int value){
         System.out.println("Added value = " + value);
+        
+        // Process to search through the tree for correct placement begins here
+        //
+        Node newNode = new Node(value);
+        
+        // If this is the first element added to the tree
+        if(root==null){
+            root = newNode;
+            return;
+        }
+        
+        // Make a current node to keep track of position without losing root
+        Node current = root;
+        
+        while(true){
+            
+            // Figure out if the value is smaller than the node
+            if (value < current.value){
+                // Check if left child is empty
+                if (current.LChild == null){
+                    current.LChild = newNode;
+                    break;
+                }
+                else{
+                    current = current.LChild;
+                }
+            }
+            
+            // Figure out if the value is larger than the node
+            else if (value > current.value){
+                // Check if left child is empty
+                if (current.RChild == null){
+                    current.RChild = newNode;
+                    break;
+                }
+                else{
+                    current = current.RChild;
+                }
+            } 
+            
+            // Theoretically, this shouldn't happen
+            else{
+                System.out.println("Error, two numbers with the same value.");
+                break;
+            }
+        }
     }
     
     // Method to establish the coordinates of the node based on its position
