@@ -14,8 +14,8 @@ public class BST {
     private int offsetX;
     private int offsetY;
     
-    boolean searching;
-    boolean gameEnded;
+    private boolean searching;
+    private boolean gameEnded;
 
     // Constructors -----------------------------------------------------------    
     public BST(int n) {
@@ -34,7 +34,7 @@ public class BST {
 
     // Methods ----------------------------------------------------------------
     // Creates the binary tree data structure from the permuted array
-    public void createFromNumberSequence(int[] A) {
+    private void createFromNumberSequence(int[] A) {
         int i;
         for (i = 0; i <= A.length - 1; i++) {
             this.add(A[i]);
@@ -42,7 +42,7 @@ public class BST {
     }
 
     // Adds each node to the tree (remember: in BST left < root < right)
-    public void add(int value) {
+    private void add(int value) {
         //System.out.println("Value to add = " + value);
 
         // Process to search through the tree for correct placement begins here
@@ -100,7 +100,8 @@ public class BST {
         assignCoordinatesRec(root, X, Y, X / 2, Y);
     }
 
-    public void assignCoordinatesRec(Node n, int px, int py, int offX, int offY) {
+    // Recursive method to establish the coordinates of the nodes
+    private void assignCoordinatesRec(Node n, int px, int py, int offX, int offY) {
 
         // If you've reach a leaf, return
         if (n == null) {
@@ -123,7 +124,7 @@ public class BST {
     }
 
     // Recursive method to display the tree
-    public void visualizeRec(Node n, Node parent) {
+    private void visualizeRec(Node n, Node parent) {
 
         // If you're reaching past a leaf, return
         if (n == null) {
@@ -147,7 +148,7 @@ public class BST {
     }
 
     // Method to return random-order array of a sequence from 1 to n
-    public int[] scrambleArray(int n) {
+    private int[] scrambleArray(int n) {
 
         Random rand = new Random();
         int i;
@@ -173,6 +174,7 @@ public class BST {
         //System.out.println(Arrays.toString(seq));
     }
 
+    // Method to engage the "game" including UI stuff
     public void startGame() {
 
         
@@ -182,8 +184,11 @@ public class BST {
         int[] arrayToDisplay;
         arrayToDisplay = this.scrambleArray(l);
 
+        // Display the array to the user in the order the Nodes should be clicked
         this.displayArray(arrayToDisplay);
 
+        // Iterate through the array in the order in which the Nodes should be 
+        //clicked, waiting for the user to click a node
         int i;
         for (i = 0; i < l; i++) {
 
@@ -203,19 +208,18 @@ public class BST {
                 if(gameEnded)
                     return;
             }
-
         }
     }
 
     // Method to start traversing through the tree
-    public void traverseTree(int x, int y, int val, int i){
+    private void traverseTree(int x, int y, int val, int i){
         
         traverseTreeRec(this.root, x, y, val, i);
         return;
     }
     
     // Method to recursively traverse through the tree
-    public void traverseTreeRec(Node node, int x, int y, int val, int i) {
+    private void traverseTreeRec(Node node, int x, int y, int val, int i) {
 
         // Reaching past a leaf, return out
         if (node == null) {
@@ -248,12 +252,12 @@ public class BST {
                 traverseTreeRec(node.LChild, x, y, val, i);
                 traverseTreeRec(node.RChild, x, y, val, i);
             }
-
         }
-
     }
 
-    public void displayArray(int[] x) {
+    // Method to display a newly scrambled version of the array in the order
+    // that he or she should click the nodes
+    private void displayArray(int[] x) {
 
         // Print out to user. Sure glad that setFont is not actually a method?
         //Main.sg.drawText("Click on these numbers in order: "
@@ -262,7 +266,8 @@ public class BST {
                 + Arrays.toString(x), 25, 25);
     }
 
-    public void redrawNode(Node node){
+    // Method to draw a "found" version of the node 
+    private void redrawNode(Node node){
         // Redraw white background
         Main.sg.drawFilledEllipse(node.px, node.py, node.sizeX, node.sizeY, Color.WHITE, 1, null);
         
@@ -279,7 +284,9 @@ public class BST {
         
     }
 
-    public void wonGame(){
+    // Method to stop iterating through the tree, clear the scene, and 
+    // indicating to the user that he or she won
+    private void wonGame(){
         
         // Set the variable to end to exit out of this game
         gameEnded = true;
@@ -293,7 +300,10 @@ public class BST {
         Main.sg.pauseProgram(2000);
         Main.sg.eraseSingleDrawable("WON");
     }
-    public void lostGame(){
+    
+    // Method to stop iterating through the tree, clear the scene, and 
+    // indicating to the user that he or she lost
+    private void lostGame(){
        
         // Set the variable to end to exit out of this game
         gameEnded = true;

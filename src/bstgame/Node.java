@@ -41,8 +41,11 @@ public class Node {
         Main.sg.drawFilledEllipse(this.px, this.py, this.sizeX, this.sizeY, Color.RED, 1,"");
     }
     
-    // I think should return whether click was inside 
+    // Checks whether the click is in the range of the current node 
     public boolean isInside(int x, int y){
+        
+        // If the click coordinate is between the top left corner of the node, 
+        // and the top left corner plus the size of the node, return true.
         if (x >= this.px && x <= this.px + this.sizeX && y >= this.py && y <= this.py + this.sizeY)
             return true;
         else

@@ -19,28 +19,38 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
 
+        int numOfNodes = 10;
         
-            BST bst = new BST(10);
-            bst.assignCoordinates();
-            bst.visualize();
+        // Initial run. Instantiate a BST, assign coordinates, show them,
+        // set up the GUI, and go through the game.
+        BST bst = new BST(numOfNodes);
+        bst.assignCoordinates();
+        bst.visualize();
 
-            // Displaying the GUI at the end seems to help?
-            setUpGUI();
+        // Displaying the GUI at the end seems to help?
+        setUpGUI();
 
-            bst.startGame();
+        // Start the game sequence
+        bst.startGame();
         
+        // Keep playing the game forever
         while (true) {
-            bst = new BST(10);
+            
+            // Initial run. Instantiate a BST, assign coordinates, show them,
+            // set up the GUI, and go through the game.
+            bst = new BST(numOfNodes);
             bst.assignCoordinates();
             bst.visualize();
 
             // Displaying the GUI at the end seems to help?
             setUpGUI();
 
+            // Start the game sequence
             bst.startGame();
         }
     }
 
+    // Method to set up the GUI
     public static void setUpGUI() {
         sg.maximizeGUIonScreen();
     }
