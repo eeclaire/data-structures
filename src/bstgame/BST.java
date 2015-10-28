@@ -1,5 +1,6 @@
 package bstgame;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -14,6 +15,7 @@ public class BST {
     private int offsetY;
     
     boolean searching;
+    boolean gameEnded;
 
     // Constructors -----------------------------------------------------------    
     public BST(int n) {
@@ -152,10 +154,10 @@ public class BST {
 
         // Make an array n elements long
         int[] a = new int[n];
-        //this.seq = new int[n];
 
         // For every element in the sequence, find a random empty array placement
         for (i = 1; i <= n; i++) {
+
             // Keep trying a new number until you find an empty location in the array
             while (true) {
                 int r = rand.nextInt(n);
@@ -179,33 +181,41 @@ public class BST {
         // Create and initialize scrambled array
         int[] arrayToDisplay;
         arrayToDisplay = this.scrambleArray(l);
-        //Main.sg.drawText("Click on these numbers in order: ", Main.sg.getWidth(), 50);
-        //Main.sg.pauseProgram(1000);
+
         this.displayArray(arrayToDisplay);
 
         int i;
         for (i = 0; i < l; i++) {
 
+            // Variable that indicates that we are still searching for this value
             searching = true;
-            // I need to find which node this corresponds to. UGH.
+            
+            // Finds if this click position corresponds to a node
             while (searching) {
+                // Wait for user action (fake event-based)
                 int[] xy = Main.sg.waitForMouseClick();
+                
                 // traverse through the tree, 
                 // if you find a node for which xy fits in the area, check value
                 // if matches, YAY (call redisplay node), if not, BOO, you lose
-                traverseTree(xy[0], xy[1], arrayToDisplay[i]);
+                traverseTree(xy[0], xy[1], arrayToDisplay[i], i);
+                
+                if(gameEnded)
+                    return;
             }
 
         }
     }
 
-    public void traverseTree(int x, int y, int val){
+    // Method to start traversing through the tree
+    public void traverseTree(int x, int y, int val, int i){
         
-        traverseTreeRec(this.root, x, y, val);
+        traverseTreeRec(this.root, x, y, val, i);
         return;
     }
     
-    public void traverseTreeRec(Node node, int x, int y, int val) {
+    // Method to recursively traverse through the tree
+    public void traverseTreeRec(Node node, int x, int y, int val, int i) {
 
         if (node == null) {
             return;
@@ -214,16 +224,21 @@ public class BST {
             if (x >= node.px && x <= node.px + node.sizeX && y >= node.py && y <= node.py + node.sizeY) {
                 if (val == node.value) {
                     System.out.println("SUCCESS");
-                    searching = false;
+                    if (i==this.seq.length-1)
+                        wonGame();
+                    else{
+                        redrawNode(node);
+                        searching = false;
+                    }
                     return;
                 } else {
                     System.out.println("FAILURE");
-                    searching = false;
+                    lostGame();                   
                     return;
                 }
             } else {
-                traverseTreeRec(node.LChild, x, y, val);
-                traverseTreeRec(node.RChild, x, y, val);
+                traverseTreeRec(node.LChild, x, y, val, i);
+                traverseTreeRec(node.RChild, x, y, val, i);
             }
 
         }
@@ -232,8 +247,56 @@ public class BST {
 
     public void displayArray(int[] x) {
 
-        // Print out to user (WHY DO I STILL HAVE TIMING(?) ISSUES?)
+        // Print out to user. Sure glad that setFont is not actually a method?
+        //Main.sg.drawText("Click on these numbers in order: "
+          //      + Arrays.toString(x), Main.sg.getWidth(), 25);
         Main.sg.drawText("Click on these numbers in order: "
-                + Arrays.toString(x), Main.sg.getWidth(), 50);
+                + Arrays.toString(x), 25, 25);
+    }
+
+    public void redrawNode(Node node){
+        // Redraw white background
+        Main.sg.drawFilledEllipse(node.px, node.py, node.sizeX, node.sizeY, Color.WHITE, 1, null);
+        
+        // Draw border
+        Main.sg.drawEllipse(node.px, node.py, node.sizeX, node.sizeY, Color.BLACK, 1, 2, null);
+        
+        // Write the number
+        Main.sg.drawText(Integer.toString(node.value), node.px+20, node.py+25, Color.BLACK, 1, null);
+        
+        //Main.sg.drawText("Click " + arrayToDisplay[i] + " next.", Main.sg.getWidth(), 50, Color.BLACK, 1, "Next");
+        Main.sg.eraseSingleDrawable("Next");
+        
+        //Main.sg.drawText("Click " + 1000 + " next.", Main.sg.getWidth(), 50, Color.BLACK, 1, "Next");
+        
+    }
+
+    public void wonGame(){
+        
+        // Set the variable to end to exit out of this game
+        gameEnded = true;
+        
+        // Clear the screen
+        Main.sg.eraseAllDrawables();
+        
+        // Display a message to the user to let him/her know he/she won, and
+        // delete the message after a few seconds to make way for the new game
+        Main.sg.drawText("Congratulations, you won! Try again!", Main.sg.getWidth()/2, Main.sg.getHeight()/2, Color.BLACK, 1, "WON");
+        Main.sg.pauseProgram(2000);
+        Main.sg.eraseSingleDrawable("WON");
+    }
+    public void lostGame(){
+       
+        // Set the variable to end to exit out of this game
+        gameEnded = true;
+        
+        // Clear the screen
+        Main.sg.eraseAllDrawables();
+        
+        // Display a message to the user to let him/her know he/she lost, and
+        // delete the message after a few seconds to make way for the new game
+        Main.sg.drawText("You lost! Try again...", Main.sg.getWidth()/2, Main.sg.getHeight()/2, Color.BLACK, 1, "LOST");
+        Main.sg.pauseProgram(2000);
+        Main.sg.eraseSingleDrawable("LOST");
     }
 }

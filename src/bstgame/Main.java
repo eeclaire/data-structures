@@ -13,33 +13,35 @@ import simplegui.SimpleGUI;
  * @author Claire
  */
 public class Main {
-    
+
     public static SimpleGUI sg = new SimpleGUI();   // SimpleGUI object
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
+
         
+            BST bst = new BST(10);
+            bst.assignCoordinates();
+            bst.visualize();
+
+            // Displaying the GUI at the end seems to help?
+            setUpGUI();
+
+            bst.startGame();
         
-        //sg.pauseProgram(500);
-        //sg.wait(1000);
-        //sg.delay(1000);
-        BST bst = new BST(4);
-        bst.assignCoordinates();
-        bst.visualize();
-        //bst.createFromNumberSequence(bst.seq);
-        //sg.pauseProgram(1000);
-        
-        // Displaying the GUI at the end seems to help?
-        setUpGUI();
-        
-        bst.startGame();
-        
-        
-        
-        //Main.sg.drawText("Click on these numbers in order: ", Main.sg.getWidth(), 70);
+        while (true) {
+            bst = new BST(10);
+            bst.assignCoordinates();
+            bst.visualize();
+
+            // Displaying the GUI at the end seems to help?
+            setUpGUI();
+
+            bst.startGame();
+        }
     }
-    
-    public static void setUpGUI(){
+
+    public static void setUpGUI() {
         sg.maximizeGUIonScreen();
     }
 }

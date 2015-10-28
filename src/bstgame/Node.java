@@ -37,7 +37,7 @@ public class Node {
         // Needs to check if node is empty (can still be clicked) or if it is 
         // filled (shows the correctly guessed value)
         
-        // Draw the ellipse
+        // Draw the original ellipse
         Main.sg.drawFilledEllipse(this.px, this.py, this.sizeX, this.sizeY, Color.RED, 1,"");
     }
     
