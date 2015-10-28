@@ -43,7 +43,10 @@ public class Node {
     
     // I think should return whether click was inside 
     public boolean isInside(int x, int y){
-        return false;
+        if (x >= this.px && x <= this.px + this.sizeX && y >= this.py && y <= this.py + this.sizeY)
+            return true;
+        else
+            return false;
     }
     
 }

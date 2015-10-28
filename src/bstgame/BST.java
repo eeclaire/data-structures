@@ -217,13 +217,22 @@ public class BST {
     // Method to recursively traverse through the tree
     public void traverseTreeRec(Node node, int x, int y, int val, int i) {
 
+        // Reaching past a leaf, return out
         if (node == null) {
             return;
-        } else {
-            // if the click is in range, check whether the values match up
-            if (x >= node.px && x <= node.px + node.sizeX && y >= node.py && y <= node.py + node.sizeY) {
+        } 
+        
+        // If the click is in range of the node, check whether the sequence 
+        // value matches up with the value of the node. If it does, redraw
+        // the node to display the number and clear the boolean that indicates
+        // that the game is searching for the correct mouse click. If it is the 
+        // last value in the sequence, engage the sequence for "Game has been 
+        // won!" If the values don't match up, the user lost: engage the 
+        // sequence for "Game has been lost!"
+        // If the click is not in the range, keep traversing through
+        else {
+            if (node.isInside(x, y)) {
                 if (val == node.value) {
-                    System.out.println("SUCCESS");
                     if (i==this.seq.length-1)
                         wonGame();
                     else{
@@ -232,7 +241,6 @@ public class BST {
                     }
                     return;
                 } else {
-                    System.out.println("FAILURE");
                     lostGame();                   
                     return;
                 }
