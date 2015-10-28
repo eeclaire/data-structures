@@ -5,7 +5,6 @@
  */
 package bstgame;
 
-import java.util.Arrays;
 import simplegui.SimpleGUI;
 
 /**
