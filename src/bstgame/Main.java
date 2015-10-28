@@ -5,6 +5,7 @@
  */
 package bstgame;
 
+import java.util.Arrays;
 import simplegui.SimpleGUI;
 
 /**
@@ -17,12 +18,25 @@ public class Main {
     
     public static void main(String[] args) {
         // TODO code application logic here
-        setUpGUI();
         
-        BST bst = new BST(9);
+        
+        //sg.pauseProgram(500);
+        //sg.wait(1000);
+        //sg.delay(1000);
+        BST bst = new BST(4);
         bst.assignCoordinates();
         bst.visualize();
         //bst.createFromNumberSequence(bst.seq);
+        //sg.pauseProgram(1000);
+        
+        // Displaying the GUI at the end seems to help?
+        setUpGUI();
+        
+        bst.startGame();
+        
+        
+        
+        //Main.sg.drawText("Click on these numbers in order: ", Main.sg.getWidth(), 70);
     }
     
     public static void setUpGUI(){
