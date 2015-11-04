@@ -1,3 +1,15 @@
+/*
+ * Claire Durand
+ *
+ * November 4th 2015
+ *
+ * CIS 2168 - Heap Visualization
+ * Program to mimick adding elements to a heap represented using an array
+ *
+ * Heap class
+ * Decribes the behavior of a heap
+ */
+
 package heapheaphoorah;
 
 import java.awt.Color;
@@ -9,7 +21,8 @@ public class Heap {
     double[] heap;
     double[] heapCp;
 
-    // Keeps track of what colors should be what in the heap
+    // Keeps track of what colors should be what in the heap and its copy
+    // 0 = grey; 1 = green; 2 = red
     int[] color;
     int[] colorCp;
     
@@ -17,32 +30,28 @@ public class Heap {
 
     // Constructor ------------------------------------------------------------
     public Heap() {
-        // Fix the size of the heap to be 20 elements 
+        
+        // Fix the size of the heap and its descriptors to be 20 elements 
         this.heap = new double[20];
         this.heapCp = new double[20];
         this.color = new int[20];
         this.colorCp = new int[20];
         
+        // Initialize the location of the current index
         this.lastIndex = 0;
     }
 
     // Methods ----------------------------------------------------------------
-    // Method to add a new element in the heap
+    // Method to add a new element, value, in the heap
     public void insert(double value) {
 
-        // reset the array
-        this.heapCp = Arrays.copyOf(heap, heap.length);  
-        
+        // Save a copy of the array to compare to the new array
+        this.heapCp = Arrays.copyOf(heap, heap.length);   
         
         // Add the new value at the end of the heap and increment the next 
         // available position in the array
         this.heap[lastIndex] = value;
         this.lastIndex++;
-
-        //swap();
-        // Should call sort  
-        //System.out.println("Heap " + Arrays.toString(heap));
-        //System.out.println("Heap copy " + Arrays.toString(heapCp));
     }
 
     // Method to bring the newest element to the top of whichever tree it should be
@@ -95,24 +104,33 @@ public class Heap {
         return parentIndex;
     }
 
+    // Method to display the two arrays and their potential contents
     public void visualize() {
         // Set the top left corner of the array display
         int x0 = Main.sg.getWidth() / 20;
-        int y0 = Main.sg.getHeight() / 2;
+        int y0 = Main.sg.getHeight() / 4;
 
         // Set size
         int w = 60;
 
+        // Print out which heap we're displaying
+        Main.sg.drawText("Old heap:", x0-5, y0-15);
+        
         // Show the old heap first
         visualizeHeap(x0, y0, w, this.heapCp, this.colorCp);
         
+        // Print out which heap we're displaying
+        Main.sg.drawText("New heap:", x0-5, y0+85);
+        
         // The display the new and improved heap!
         visualizeHeap(x0, y0+100, w, this.heap, this.color);
-
     }
 
+    // Function to set green the color of the array cells under the currentIndex
     public void setGreen(){
         int i;
+        
+        // For all cells in the array
         for(i=0; i<20; i++){
             
             // Set the default green for the newest array
@@ -127,14 +145,15 @@ public class Heap {
         }
     }
     
+    // Given a heap array and its color array, print it out appropriately
     public void visualizeHeap(int x, int y, int w, double a[], int c[]) {
 
+        // For all of the cells in the array
         int i;
         for (i = 0; i < 20; i++) {
 
-            // But how to I set font though?
-            // If the box has a non-zero value, draw it in green
-            // Non-perfect system --> what if user enters 0?
+            // Depending on the value in the color array, display the box with 
+            // a certain color. Display the number if the color is red or green.
             if (c[i] == 2) {
                 Main.sg.drawFilledBox(x, y, w, w, Color.RED, 1, null);
                 Main.sg.drawText(Double.toString(a[i]), x + 20, y + 30, Color.WHITE, 1, null);
