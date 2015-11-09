@@ -26,6 +26,10 @@ public class Main {
         int h = sg.getHeight();
         
         // Do the things to make it a certain size in the constructor
+        Hashtable hash = new Hashtable();
+        
+        
+        hash.visualizeHT();
         
         // Draw the first button
         sg.drawFilledBox(5, h*9/10-5, w/3-5, h/10, Color.yellow, 0.5, null);
