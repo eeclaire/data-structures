@@ -7,12 +7,15 @@ public class Hashtable {
 
     // Fields -----------------------------------------------------------------
     double[] ht;    // hashtable
-    double[] collisions;    // collisions hashtable
+    int[] collisions;    // collisions hashtable
 
     // Constructor ------------------------------------------------------------
     public Hashtable() {
         this.ht = new double[100];    // hashtable
-        this.collisions = new double[100];    // collisions hashtable
+        this.collisions = new int[100];    // collisions hashtable
+        
+        // Fills the hashtable array with -1
+        Arrays.fill(this.ht, -1);
         
         // Fills the collisions table with -1 ==> black cell by default
         Arrays.fill(this.collisions, -1);
@@ -34,7 +37,7 @@ public class Hashtable {
         
         // NOW START DRAWING IT
         for (int i=0; i<100; i++){
-            visualizeCell(x, y, size, Color.BLACK);
+            visualizeCell(x, y, size, this.collisions[i]);
             
             // Increment the position coordinates
             x += size+5;
@@ -45,19 +48,28 @@ public class Hashtable {
                 y += size+5;
                 x = x0;
             }     
-        }
-        
+        }    
         Main.sg.drawText("Hardcoded 0 for now", w, y);
     }
     
     // Method to display individual cells from the hashtable
-    public void visualizeCell(int x, int y, int size, Color cellColor){
+    private void visualizeCell(int x, int y, int size, int coll){
+        
+        // Compute the appropriate color for this number of collisions
+        Color cellColor = computeCellColor(coll);
+        
+        // Redraw the box with the appropriate cell color
         Main.sg.drawFilledBox(x, y, size, size, cellColor, 1, null);       
     }
     
-    // Method to calculate color?
-    public Color computeCellColor(int collisions){
-        //Hey
+    // Method to calculate color given the number of collision in a cell
+    private Color computeCellColor(int collisions){
+        
+        // If the cell doesn't exist yet (collisions=-1), 
+        // the cell should be black
+        if(collisions<0){
+            return Color.black;
+        }
         
         // Increase the percentage of red with increasing number of collisions
         // Cap that shade of red at 255 (the max color value)
@@ -89,14 +101,20 @@ public class Hashtable {
         // Until the hashtable element doesn't have anything in it, 
         // increment the number of collisions in that cell, then incremenet
         // the index to linearly probe the hashtable
-        while(this.ht[index] != 0){
+        while(this.ht[index] != -1){
             this.collisions[index]++;
             index++;
+            
+            // Create a "wrap" for the linear probing
+            if(index>99){
+                index = 0;
+            }
         }
         
         // Once we reach an index with no value in the hashtable cell, 
         // set it to the value we want to save
         this.ht[index] = value;
+        this.collisions[index] = 0;
                 
     }
 
@@ -112,5 +130,15 @@ public class Hashtable {
             v = Math.random()*1000;
             this.addOne(v);
         }
+    }
+    
+    // Method to reset the hashtable to its empty state & clear collisions
+    public void reset(){
+        
+        // Fills the hashtable array with -1
+        Arrays.fill(this.ht, -1);
+        
+        // Fills the collisions table with -1 ==> black cell by default
+        Arrays.fill(this.collisions, -1);
     }
 }

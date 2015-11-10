@@ -39,12 +39,23 @@ public class Main {
             int []xy = sg.waitForMouseClick();
             
             // Test the place the user clicked for one of the "buttons"
+            
+            // User clicked within the coordinates of the "ten more button"
             if(xy[0]>w/3+5 && xy[0]<(w/3+5)+(w/3-5)
                     && xy[1]>(h*9/10-5) && xy[1]<(h*9/10-5)+(h/10)){
                 System.out.println("User asked for 10 more");
-            } else if (xy[0]>5 && xy[0]<w/3
+                hash.addTen();
+                hash.visualizeHT(w*2/3+5);
+            } 
+            
+            // User clicked within the coordinates of the "reset button"
+            else if (xy[0]>5 && xy[0]<w/3
                     && xy[1]>(h*9/10-5) && xy[1]<(h*9/10-5)+(h/10)){
                 System.out.println("User asked to reset");
+                
+                // I need to create a hash.reset method
+                hash.reset();
+                hash.visualizeHT(w*2/3+5);
             }
             
         }
