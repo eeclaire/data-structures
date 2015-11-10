@@ -17,20 +17,42 @@ public class Main {
     public static SimpleGUI sg = new SimpleGUI();
 
     public static void main(String[] args) {
-        setGUI();
-    }
-    
-    public static void setGUI(){
         
+        // Get the width and the hight of the GUI
         int w = sg.getWidth();
         int h = sg.getHeight();
         
+        // Some set up things
+        setGUI(w,h);
+                
+
         // Do the things to make it a certain size in the constructor
         Hashtable hash = new Hashtable();
         
+        // Primer visualization
+        hash.visualizeHT(w*2/3+5);
         
-        hash.visualizeHT();
+        // Fix this so that full hashtable set it false
+        while(true){
+            
+            // Get the coordinates when the user clicks
+            int []xy = sg.waitForMouseClick();
+            
+            // Test the place the user clicked for one of the "buttons"
+            if(xy[0]>w/3+5 && xy[0]<(w/3+5)+(w/3-5)
+                    && xy[1]>(h*9/10-5) && xy[1]<(h*9/10-5)+(h/10)){
+                System.out.println("User asked for 10 more");
+            } else if (xy[0]>5 && xy[0]<w/3
+                    && xy[1]>(h*9/10-5) && xy[1]<(h*9/10-5)+(h/10)){
+                System.out.println("User asked to reset");
+            }
+            
+        }
         
+    }
+    
+    public static void setGUI(int w, int h){
+
         // Draw the first button
         sg.drawFilledBox(5, h*9/10-5, w/3-5, h/10, Color.yellow, 0.5, null);
         sg.drawBox(5, h*9/10-5, w/3-5, h/10, Color.yellow, 0.6, 5, null);
