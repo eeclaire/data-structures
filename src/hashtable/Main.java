@@ -22,9 +22,10 @@ public class Main {
         int w = sg.getWidth();
         int h = sg.getHeight();
         
+        int count = 0;
+        
         // Some set up things
         setGUI(w,h);
-                
 
         // Do the things to make it a certain size in the constructor
         Hashtable hash = new Hashtable();
@@ -43,9 +44,14 @@ public class Main {
             // User clicked within the coordinates of the "ten more button"
             if(xy[0]>w/3+5 && xy[0]<(w/3+5)+(w/3-5)
                     && xy[1]>(h*9/10-5) && xy[1]<(h*9/10-5)+(h/10)){
+                if(count>9){
+                    hash.reset();
+                    count = 0;
+                }
                 System.out.println("User asked for 10 more");
                 hash.addTen();
                 hash.visualizeHT(w*2/3+5);
+                count++;
             } 
             
             // User clicked within the coordinates of the "reset button"
@@ -56,6 +62,7 @@ public class Main {
                 // I need to create a hash.reset method
                 hash.reset();
                 hash.visualizeHT(w*2/3+5);
+                count = 0;
             }
             
         }
@@ -77,7 +84,7 @@ public class Main {
         // Draw the third button
         sg.drawFilledBox(w*2/3+5, h*9/10-5, w/3-5, h/10, Color.red, 0.5, null);
         sg.drawBox(w*2/3+5, h*9/10-5, w/3-5, h/10, Color.red, 0.6, 5, null);
-        sg.drawText("Number of collisions", w*2/3+(w/3-5)/4, h*9/10+25);
+        
     }
 
 }

@@ -1,5 +1,6 @@
 package hashtable;
 
+import static hashtable.Main.sg;
 import java.awt.Color;
 import java.util.Arrays;
 
@@ -8,11 +9,14 @@ public class Hashtable {
     // Fields -----------------------------------------------------------------
     double[] ht;    // hashtable
     int[] collisions;    // collisions hashtable
+    int totalColls;    // total collision counter
 
     // Constructor ------------------------------------------------------------
     public Hashtable() {
         this.ht = new double[100];    // hashtable
         this.collisions = new int[100];    // collisions hashtable
+        
+        this.totalColls = 0;    // Clear the total count
         
         // Fills the hashtable array with -1
         Arrays.fill(this.ht, -1);
@@ -25,6 +29,8 @@ public class Hashtable {
     
     // Method to display the WHOLE hashtable
     public void visualizeHT(int w) {
+        
+        int h = Main.sg.getHeight();
         
         // Set some initial values
         int size = 35;
@@ -50,6 +56,12 @@ public class Hashtable {
             }     
         }    
         Main.sg.drawText("Hardcoded 0 for now", w, y);
+        
+        // Erase the previous collision total and write the new one
+        Main.sg.eraseSingleDrawable("collisions");
+        Main.sg.drawText("Total: "+this.totalColls+" collisions", w+(w/2)/4, 
+                h*9/10+25, Color.BLACK, 1, "collisions");
+        
     }
     
     // Method to display individual cells from the hashtable
@@ -102,9 +114,10 @@ public class Hashtable {
         // increment the number of collisions in that cell, then incremenet
         // the index to linearly probe the hashtable
         while(this.ht[index] != -1){
+            this.totalColls++;
             this.collisions[index]++;
             index++;
-            
+                        
             // Create a "wrap" for the linear probing
             if(index>99){
                 index = 0;
@@ -134,6 +147,8 @@ public class Hashtable {
     
     // Method to reset the hashtable to its empty state & clear collisions
     public void reset(){
+        
+        this.totalColls = 0;
         
         // Fills the hashtable array with -1
         Arrays.fill(this.ht, -1);
