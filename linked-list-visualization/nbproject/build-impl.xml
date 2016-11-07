@@ -19,11 +19,9 @@ is divided into following sections:
   - cleanup
 
         -->
-<<<<<<< HEAD
-<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir=".." default="default" name="CIS2168_Assignment1_Bonus-impl">
-=======
-<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir=".." default="default" name="BSTGame-impl">
->>>>>>> bst-game/master
+
+<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir=".." default="default" name="Visualization-impl">
+
     <fail message="Please build using Ant 1.8.0 or higher.">
         <condition>
             <not>
@@ -448,10 +446,14 @@ is divided into following sections:
                 </union>
                 <taskdef classname="org.testng.TestNGAntTask" classpath="${run.test.classpath}" name="testng"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="CIS2168_Assignment1_Bonus" testname="TestNG tests" workingDir="${work.dir}">
 =======
                 <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="BSTGame" testname="TestNG tests" workingDir="${work.dir}">
 >>>>>>> bst-game/master
+=======
+                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Visualization" testname="TestNG tests" workingDir="${work.dir}">
+>>>>>>> ll-visual/master
                     <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
                     <propertyset>
                         <propertyref prefix="test-sys-prop."/>
@@ -603,10 +605,14 @@ is divided into following sections:
                     <isset property="test.method"/>
                 </condition>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <condition else="-suitename CIS2168_Assignment1_Bonus -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
 =======
                 <condition else="-suitename BSTGame -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
 >>>>>>> bst-game/master
+=======
+                <condition else="-suitename Visualization -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+>>>>>>> ll-visual/master
                     <matches pattern=".*\.xml" string="@{testClass}"/>
                 </condition>
                 <delete dir="${build.test.results.dir}" quiet="true"/>
@@ -899,10 +905,14 @@ is divided into following sections:
     </target>
     <target if="already.built.jar.${basedir}" name="-warn-already-built-jar">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <echo level="warn" message="Cycle detected: CIS2168_Assignment1_Bonus was already built"/>
 =======
         <echo level="warn" message="Cycle detected: BSTGame was already built"/>
 >>>>>>> bst-game/master
+=======
+        <echo level="warn" message="Cycle detected: Visualization was already built"/>
+>>>>>>> ll-visual/master
     </target>
     <target depends="init,-deps-jar-init" name="deps-jar" unless="no.deps">
         <mkdir dir="${build.dir}"/>
@@ -1388,10 +1398,14 @@ is divided into following sections:
     </target>
     <target if="already.built.clean.${basedir}" name="-warn-already-built-clean">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <echo level="warn" message="Cycle detected: CIS2168_Assignment1_Bonus was already built"/>
 =======
         <echo level="warn" message="Cycle detected: BSTGame was already built"/>
 >>>>>>> bst-game/master
+=======
+        <echo level="warn" message="Cycle detected: Visualization was already built"/>
+>>>>>>> ll-visual/master
     </target>
     <target depends="init,-deps-clean-init" name="deps-clean" unless="no.deps">
         <mkdir dir="${build.dir}"/>
