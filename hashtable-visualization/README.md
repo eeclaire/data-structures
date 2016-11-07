@@ -1,7 +1,10 @@
-# hashtable-visualization
-Visualizing how a hashtable works
+# Hashtable visualization
 
+####Visualizing how a hashtable works
 
-Hastable with linear probing. (I'm sorry, I know it's gross. This is what the assignment stipulates. I'll work on a linked list one.)
+Hastable with linear probing.
+
 
 Source: http://knight.temple.edu/~lakamper/courses/cis2168_2013FALL/assignments/Assignment9.pdf
+
+_Project realized in Java using NetBeans._
