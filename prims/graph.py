@@ -24,5 +24,5 @@ class Graph:
 	def print_connections(self):
 		for node in self.nodes:
 			for connected_node in node.get_connections():
-				print("%s connected to %s by %s"%(node.name, connected_node.name, node.get_connection_weight(connected_node)))
+				print("%s connected to %s with a weight of %s"%(node.name, connected_node.name, node.get_connection_weight(connected_node)))
 
