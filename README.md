@@ -17,4 +17,5 @@ A collection of projects related to data structure concepts
 * [Shape Abstraction](./shape-abstraction) - Abstract down a shape by finding the most visually-significant points in a linked list
 
 #### In Python:
-* [Prim's Algorithm](./prims) - incomplete
+* [Prim's Algorithm](./prims) - Implement Prim's algorithm for finding the MST in a graph
+* [Markov Chain](./markov-chain) - Implement a Markov Chain
