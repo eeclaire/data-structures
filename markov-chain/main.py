@@ -1,6 +1,7 @@
 """Implement and run some examples for the Markov-Chain."""
 
 from markov import Markov
+from utils import prep_text
 
 
 def main():
@@ -13,28 +14,25 @@ def main():
     m = Markov()
     m.add_text(clean_text_list)
 
-    text = ""
-    for i in range(10):
-        sentence = m.generate_sentence(10)
-        text = text + " " + sentence
+    text = generate_paragraph(m, 10, 10)
     print(text)
 
 
-def prep_text(text_raw):
-    """Clean up data so that it's consistent when entered into the chain."""
-    sentences = text_raw.split('.')
+def generate_paragraph(m, n_sentences, max_words_per_sentence):
+    """
+    Generate a paragraph of n number of sentences.
 
-    sentences_and_periods = []
-    for sentence in sentences:
-        sentences_and_periods.append(sentence)
-        sentences_and_periods.append('.')
+    args:
+    m - the Markov Chain object to use to generate text
+    n_sentences - the number of "sentences" to generate
+    max_words_per_sentence - the max number of words generated in one sentence
+    """
+    text = ""
+    for i in range(n_sentences):
+        sentence = m.generate_sentence(max_words_per_sentence)
+        text = text + " " + sentence
 
-    split_words = []
-    for sentence in sentences_and_periods:
-        words = sentence.split()
-        [split_words.append(word.lower()) for word in words]
-
-    return split_words
+    return text
 
 
 if __name__ == "__main__":

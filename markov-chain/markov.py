@@ -30,7 +30,6 @@ class Markov:
         args:
         n - the desired max number of words in the sentence
         """
-
         # Come up with the first word by using a possible word after a period
         current_word = random.choice(self.chain['.'])
         generated_text = current_word
@@ -47,4 +46,9 @@ class Markov:
                 generated_text = generated_text + " " + next_word
                 current_word = next_word
                 word_count += 1
+
+        # Make sure each sentence ends with a period
+        if generated_text[-1] != '.':
+            generated_text = generated_text + '.'
+
         return generated_text

@@ -23,6 +23,20 @@ class TestMarkovMethods(unittest.TestCase):
         self.m.add_next_word('hello', 'you')
         self.assertEqual(self.m.chain, {'hello': ['world', 'you']})
 
+    def test_paragraph_entry(self):
+        """
+        Test insertion of a paragraph into the chains.
+
+        Verify the logic concerning the period.
+        """
+        self.m.add_text(['hello', 'world', '.', 'goodnight', 'moon', '.'])
+        self.assertEqual(self.m.chain, {
+            '.': ['hello', 'goodnight'],
+            'hello': ['world'],
+            'world': ['.'],
+            'goodnight': ['moon'],
+            'moon': ['.']})
+
     def test_sentence_generation(self):
         """Test traversing through Markov-Chain dict to create sentence."""
         self.m.add_text(['hello', 'world', '.'])
