@@ -17,5 +17,7 @@ A collection of projects related to data structure concepts
 * [Shape Abstraction](./shape-abstraction) - Abstract down a shape by finding the most visually-significant points in a linked list
 
 #### In Python :snake:
-* [Prim's Algorithm](./prims) - Implement Prim's algorithm for finding the MST in a graph
-* [Markov Chain](./markov-chain) - Implement a Markov Chain and generate sentences
+* [Bloom Filter](./bloom-filter) - Check whether an element is definitely not, or probably in a set using a Bloom filter
+* [Markov Chain](./markov-chain) - Generate sentences using a Markov Chain built using text of your choice
+* [Prim's Algorithm](./prims) - Find the MST in a graph using Prim's algorithm
+
