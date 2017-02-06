@@ -3,7 +3,6 @@
 from markov import Markov
 from utils import prep_text
 
-
 def main():
     """Entry point for the code execution."""
     f = open('sample.txt', 'r')
@@ -16,7 +15,7 @@ def main():
 
     text = generate_paragraph(m, 10, 10)
     print(text)
-
+    f.close()
 
 def generate_paragraph(m, n_sentences, max_words_per_sentence):
     """
@@ -30,10 +29,9 @@ def generate_paragraph(m, n_sentences, max_words_per_sentence):
     text = ""
     for i in range(n_sentences):
         sentence = m.generate_sentence(max_words_per_sentence)
-        text = text + " " + sentence
+        text += " " + sentence
 
     return text
-
 
 if __name__ == "__main__":
     main()
