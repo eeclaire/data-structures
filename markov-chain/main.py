@@ -14,8 +14,10 @@ def main():
     m = Markov()
     m.add_text(clean_text_list)
 
-    text = generate_paragraph(m, 10, 10)
+    text = generate_paragraph(m, 10, 20)
     print(text)
+
+    f.close()
 
 
 def generate_paragraph(m, n_sentences, max_words_per_sentence):
