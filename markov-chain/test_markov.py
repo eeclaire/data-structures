@@ -4,7 +4,6 @@ import unittest
 
 from markov import Markov
 
-
 class TestMarkovMethods(unittest.TestCase):
     """Test the Markov-Chain."""
 
@@ -43,7 +42,6 @@ class TestMarkovMethods(unittest.TestCase):
         self.m.add_text(['hello', 'you', '.'])
         self.assertIn(
             self.m.generate_sentence(4), ['hello world.', 'hello you.'])
-
 
 if __name__ == '__main__':
     unittest.main()

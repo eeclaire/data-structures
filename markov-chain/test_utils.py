@@ -4,7 +4,6 @@ import unittest
 
 from utils import *
 
-
 class TestUtilityFunctions(unittest.TestCase):
     """Test the functions."""
 
@@ -16,7 +15,6 @@ class TestUtilityFunctions(unittest.TestCase):
         """Check that the output looks like what we expect."""
         self.assertEqual(prep_text(self.raw), [
             'hello', 'world', '.', 'goodnight', 'moon', '.'])
-
 
 if __name__ == '__main__':
     unittest.main()
