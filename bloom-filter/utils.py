@@ -25,7 +25,7 @@ def hash_multiply(element, table_size):
     Return an integer.
     """
     char_val_list = list(map(lambda x: ord(x), str(element)))
-    hash_val = 0
+    hash_val = 1
     for val in char_val_list:
         hash_val *= val
     index = hash_val % table_size

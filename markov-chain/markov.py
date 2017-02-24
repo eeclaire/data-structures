@@ -37,7 +37,7 @@ class Markov:
 
         # Iterate through the markov chain until you hit a period
         # or the max number of words in a sentence
-        while(current_word != '.' and word_count < n):
+        while(word_count < n):
             next_word = random.choice(self.chain[current_word])
             if next_word == '.':
                 generated_text = generated_text + "."
