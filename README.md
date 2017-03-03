@@ -20,4 +20,6 @@ A collection of projects related to data structure concepts
 * [Bloom Filter](./bloom-filter) - Check whether an element is definitely not, or probably in a set using a Bloom filter
 * [Markov Chain](./markov-chain) - Generate sentences using a Markov Chain built using text of your choice
 * [Prim's Algorithm](./prims) - Find the MST in a graph using Prim's algorithm
+* [Unrolled Linked List](./unrolled-linked-list) - A linked list combined with arrays
+* [Weight Balanced Tree](./weight-balanced-tree) - A self balancing tree that uses the size of each subtree
 
